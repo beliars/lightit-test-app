@@ -14,14 +14,14 @@ var http_1 = require('@angular/http');
 var rest_service_1 = require('./shared/rest.service');
 var app_component_1 = require('./components/app.component');
 var products_component_1 = require('./components/products/products.component');
-var product_item_component_1 = require('./components/product-item/product-item.component');
+// import { ProductItemComponent } from './components/product-item/product-item.component';
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
-            declarations: [app_component_1.AppComponent, products_component_1.ProductsComponent, product_item_component_1.ProductItemComponent],
+            declarations: [app_component_1.AppComponent, products_component_1.ProductsComponent],
             providers: [rest_service_1.RestService],
             bootstrap: [app_component_1.AppComponent]
         }), 
