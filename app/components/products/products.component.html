@@ -22,8 +22,8 @@
 		<ul class="product-comments list-unstyled">
 			<li *ngFor="let comment of comments">
 				<div class="text">
-					<p>Rate: {{ comment.rate }}</p>
 					<p>Comment: {{ comment.text }}</p>
+					<p>Rate: {{ comment.rate }}</p>
 					<p>Created by: {{ comment.created_by.username }} at {{ comment.created_at | date: 'fullDate' }}</p>
 				</div>
 			</li>
