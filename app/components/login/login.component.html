@@ -1,0 +1,17 @@
+<form class="regForm">
+	<div class="form-group">
+		<label for="username">Email address</label>
+		<input type="text" class="form-control" id="username" placeholder="Username" #username required>
+	</div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<input type="password" class="form-control" id="password" placeholder="Password" #password required>
+	</div>
+	<button type="submit" class="btn btn-primary" 
+        (click)="register($event, username.value, password.value)">Sign Up</button>
+	<button type="submit" class="btn btn-success"
+        (click)="login($event, username.value, password.value)">Sign In</button>
+	<button type="button" routerLink="/products" class="btn btn-warning">Skip</button>
+    <p *ngIf="message.error" class="message text-danger">{{ message.error }}</p>
+    <p *ngIf="message.success" class="message text-success">{{ message.success }}</p>
+</form>

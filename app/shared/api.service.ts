@@ -10,17 +10,14 @@ import 'rxjs/add/operator/catch';
 
 import { Product } from './product.model';
 import { Comment } from './comment.model';
+import { User } from './user.model';
 
 @Injectable()
 
-export class RestService {
+export class ApiService {
 
     private apiUrl = 'http://smktesting.herokuapp.com/api/';
-    testUser = {
-    		"username": "TestUser123",
-    		"password": "qwerty123"
-    	};
-
+ 
     constructor(private http: Http) {
     }
 
@@ -36,11 +33,20 @@ export class RestService {
     		.catch(this.handleError);
     }
 
-    regUser() {
-    	let body = JSON.stringify(this.testUser);
+    regUser(userData) {
+    	let body = JSON.stringify(userData);
     	let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
     	return this.http.post(this.apiUrl + 'register/', body, options)
+            .map(res => res.json())
+            .catch(this.handleError); 
+    }
+
+    loginUser(userData) {
+    	let body = JSON.stringify(userData);
+    	let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers});
+    	return this.http.post(this.apiUrl + 'login/', body, options)
             .map(res => res.json())
             .catch(this.handleError); 
     }

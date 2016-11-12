@@ -4,29 +4,6 @@
 		(click)="selectProduct(product)">{{ product.title }}
 	</li>
 </ul>
+<button *ngIf="!selectedProduct" type="button" class="btn btn-danger go-back" (click)="goBack()">Back</button>
 <hr *ngIf="selectedProduct">
-<div class="selected-product row" *ngIf="selectedProduct">
-	<div class="col-xs-6">
-		<h2>{{ selectedProduct.title }}</h2>
-		<img src="./app/shared/images/{{ selectedProduct.img }}" class="img-responsive" alt="">
-		<div class="text">
-			<h3>Product description</h3>
-			<hr>
-			<p>{{ selectedProduct.text }}</p>
-		</div>
-	</div>
-	<div class="col-xs-6">
-		<textarea class="form-control" rows="3"></textarea>
-		<button type="submit" class="btn btn-primary">Send</button>
-		<h3 class="text">Comments</h3>
-		<ul class="product-comments list-unstyled">
-			<li *ngFor="let comment of comments">
-				<div class="text">
-					<p>Comment: {{ comment.text }}</p>
-					<p>Rate: {{ comment.rate }}</p>
-					<p>Created by: {{ comment.created_by.username }} at {{ comment.created_at | date: 'fullDate' }}</p>
-				</div>
-			</li>
-		</ul>
-	</div>
-</div>
+<product-item (closedProduct)="closeProduct($event)" [selectedProduct]="selectedProduct" [comments]="comments"></product-item>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
-import { RestService } from '../../shared/rest.service';
+import { ApiService } from '../../shared/api.service';
 import { Product } from '../../shared/product.model';
 import { Comment } from '../../shared/comment.model';
 
@@ -14,11 +15,11 @@ import { Comment } from '../../shared/comment.model';
 export class ProductsComponent implements OnInit{ 
 
     products: Product[];
-    selectedProduct: Product;
+    selectedProduct;
     comments: Comment[];
 
 
-    constructor(private restService: RestService) {
+    constructor(private apiService: ApiService, private location: Location) {
     }
 
     ngOnInit() {
@@ -26,10 +27,7 @@ export class ProductsComponent implements OnInit{
     }
 
     getProducts() {
-        this.restService.getProducts().subscribe(products => {
-            console.log(products);
-            return this.products = products;
-            });
+        this.apiService.getProducts().subscribe(products => this.products = products);
     }
 
     selectProduct(product: Product) {
@@ -38,9 +36,14 @@ export class ProductsComponent implements OnInit{
     }
 
     getComments(id) {
-        this.restService.getComments(id).subscribe(comments => {
-            console.log(comments);
-            return this.comments = comments;
-        })
+        this.apiService.getComments(id).subscribe(comments => this.comments = comments);
+    }
+
+    goBack(): void {
+        this.location.back();
+    }
+
+    closeProduct(selectedProduct: Product) {
+        this.selectedProduct = !selectedProduct;
     }
 }

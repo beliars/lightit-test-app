@@ -9,20 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var rest_service_1 = require('../../shared/rest.service');
+var common_1 = require('@angular/common');
+var api_service_1 = require('../../shared/api.service');
 var ProductsComponent = (function () {
-    function ProductsComponent(restService) {
-        this.restService = restService;
+    function ProductsComponent(apiService, location) {
+        this.apiService = apiService;
+        this.location = location;
     }
     ProductsComponent.prototype.ngOnInit = function () {
         this.getProducts();
     };
     ProductsComponent.prototype.getProducts = function () {
         var _this = this;
-        this.restService.getProducts().subscribe(function (products) {
-            console.log(products);
-            return _this.products = products;
-        });
+        this.apiService.getProducts().subscribe(function (products) { return _this.products = products; });
     };
     ProductsComponent.prototype.selectProduct = function (product) {
         this.selectedProduct = product;
@@ -30,10 +29,13 @@ var ProductsComponent = (function () {
     };
     ProductsComponent.prototype.getComments = function (id) {
         var _this = this;
-        this.restService.getComments(id).subscribe(function (comments) {
-            console.log(comments);
-            return _this.comments = comments;
-        });
+        this.apiService.getComments(id).subscribe(function (comments) { return _this.comments = comments; });
+    };
+    ProductsComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    ProductsComponent.prototype.closeProduct = function (selectedProduct) {
+        this.selectedProduct = !selectedProduct;
     };
     ProductsComponent = __decorate([
         core_1.Component({
@@ -42,7 +44,7 @@ var ProductsComponent = (function () {
             templateUrl: 'products.component.html',
             styleUrls: ['products.component.css']
         }), 
-        __metadata('design:paramtypes', [rest_service_1.RestService])
+        __metadata('design:paramtypes', [api_service_1.ApiService, common_1.Location])
     ], ProductsComponent);
     return ProductsComponent;
 }());
