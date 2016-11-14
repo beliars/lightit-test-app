@@ -1,0 +1,43 @@
+.product-comments li {
+    border: 1px solid #cec4c4;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product-comments li div {
+    margin: 10px 5px 5px 10px;
+}
+
+.product-comments li p:first-child {
+    font-size: 115%;
+}
+
+.product-comments li p:last-child {
+    font-size: 80%;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.product-comments li p:nth-child(2) {
+    font-size: 90%;
+    margin-bottom: 0;
+}
+
+.product-comments {
+    margin-top: 45px;
+    color: #737070;
+    word-wrap: break-word;
+}
+
+.product-comments .rating {
+    margin-bottom: 5px;
+}
+
+.product-comments textarea {
+    resize: vertical;
+}
+
+.product-comments button {
+    margin-top: 15px;
+    padding: 6px 25px;
+}

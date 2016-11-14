@@ -10,14 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var router_1 = require('@angular/router');
 var api_service_1 = require('../../shared/api.service');
 var ProductsComponent = (function () {
-    function ProductsComponent(apiService, location) {
+    function ProductsComponent(apiService, location, router) {
         this.apiService = apiService;
         this.location = location;
+        this.router = router;
+        this.loggedUser = {
+            username: '',
+            token: ''
+        };
     }
     ProductsComponent.prototype.ngOnInit = function () {
         this.getProducts();
+        this.getLoggedUserData();
+        console.log(this.loggedUser);
     };
     ProductsComponent.prototype.getProducts = function () {
         var _this = this;
@@ -31,8 +39,19 @@ var ProductsComponent = (function () {
         var _this = this;
         this.apiService.getComments(id).then(function (comments) { return _this.comments = comments; });
     };
+    ProductsComponent.prototype.getLoggedUserData = function () {
+        this.loggedUser = this.apiService.getLoggedUser();
+    };
     ProductsComponent.prototype.goBack = function () {
         this.location.back();
+    };
+    ProductsComponent.prototype.logout = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.loggedUser.username = '';
+            _this.loggedUser.token = '';
+            _this.router.navigate(['auth']);
+        }, 1000);
     };
     ProductsComponent.prototype.closeProduct = function (selectedProduct) {
         this.selectedProduct = !selectedProduct;
@@ -44,7 +63,7 @@ var ProductsComponent = (function () {
             templateUrl: 'products.component.html',
             styleUrls: ['products.component.css']
         }), 
-        __metadata('design:paramtypes', [api_service_1.ApiService, common_1.Location])
+        __metadata('design:paramtypes', [api_service_1.ApiService, common_1.Location, router_1.Router])
     ], ProductsComponent);
     return ProductsComponent;
 }());

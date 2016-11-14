@@ -1,0 +1,31 @@
+<div class="product-comments col-xs-6">
+	<div class="rating">
+		<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="4"> 4
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="5"> 5
+		</label>
+	</div>
+	<textarea class="form-control" rows="3"></textarea>
+	<button type="submit" class="btn btn-primary">Send</button>
+	<h3 class="text">Comments</h3>
+	<ul class="list-unstyled">
+		<li *ngFor="let comment of comments">
+			<div class="text">
+				<p>Comment: {{ comment.text }}</p>
+				<p>Rate: {{ comment.rate }}</p>
+				<p>Created by: {{ comment.created_by.username }} at {{ comment.created_at | date: 'fullDate' }}</p>
+			</div>
+		</li>
+	</ul>
+</div>

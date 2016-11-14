@@ -12,7 +12,18 @@ import { User } from './user.model';
 export class ApiService {
 
     private apiUrl = 'http://smktesting.herokuapp.com/api/';
- 
+    private headers = new Headers({'Content-Type': 'application/json'});
+    private options = new RequestOptions({headers: this.headers});
+    
+    private loggedUser = {
+        username: '',
+        token: ''
+    }
+
+    getLoggedUser(){
+        return this.loggedUser;
+    }
+
     constructor(private http: Http) {
     }
 
@@ -30,24 +41,30 @@ export class ApiService {
     		.catch(this.handleError);
     }
 
-    regUser(userData: any): Promise<any> {
+    regUser(userData: User): Promise<any> {
+        this.loggedUser.username = userData.username;
     	let body = JSON.stringify(userData);
-    	let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers});
-    	return this.http.post(this.apiUrl + 'register/', body, options)
+    	return this.http.post(this.apiUrl + 'register/', body, this.options)
             .toPromise()
-            .then(res => res.json())
+            .then(res => {
+                this.loggedUser.token = res.json().token;
+                return res.json();
+            })
             .catch(this.handleError); 
     }
 
-    loginUser(userData: any): Promise<any> {
+    data;
+
+    loginUser(userData: User): Promise<any> {
+        this.loggedUser.username = userData.username;
     	let body = JSON.stringify(userData);
-    	let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers});
-    	return this.http.post(this.apiUrl + 'login/', body, options)
+    	return this.http.post(this.apiUrl + 'login/', body, this.options)
             .toPromise()
-            .then(res => res.json())
-            .catch(this.handleError); 
+            .then(res => {
+                this.loggedUser.token = res.json().token;
+                return res.json()
+                })
+            .catch(this.handleError);
     }
 
     private handleError(error: Error) {

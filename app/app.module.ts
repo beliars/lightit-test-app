@@ -10,6 +10,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductItemCommentsComponent } from './components/product-item-comments/product-item-comments.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 
 @NgModule({
@@ -33,7 +34,15 @@ import { ProductItemComponent } from './components/product-item/product-item.com
       }
     ])
   ],
-  declarations: [ AppComponent, AuthComponent, RegisterComponent, LoginComponent, ProductsComponent, ProductItemComponent ],
+  declarations: [ 
+    AppComponent, 
+    AuthComponent, 
+    RegisterComponent, 
+    LoginComponent, 
+    ProductsComponent, 
+    ProductItemCommentsComponent, 
+    ProductItemComponent 
+  ],
   providers: [ ApiService ],
   bootstrap: [ AppComponent ]
 })

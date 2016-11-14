@@ -15,7 +15,16 @@ var ApiService = (function () {
     function ApiService(http) {
         this.http = http;
         this.apiUrl = 'http://smktesting.herokuapp.com/api/';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
+        this.loggedUser = {
+            username: '',
+            token: ''
+        };
     }
+    ApiService.prototype.getLoggedUser = function () {
+        return this.loggedUser;
+    };
     ApiService.prototype.getProducts = function () {
         return this.http.get(this.apiUrl + 'products/')
             .toPromise()
@@ -29,21 +38,27 @@ var ApiService = (function () {
             .catch(this.handleError);
     };
     ApiService.prototype.regUser = function (userData) {
+        var _this = this;
+        this.loggedUser.username = userData.username;
         var body = JSON.stringify(userData);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + 'register/', body, options)
+        return this.http.post(this.apiUrl + 'register/', body, this.options)
             .toPromise()
-            .then(function (res) { return res.json(); })
+            .then(function (res) {
+            _this.loggedUser.token = res.json().token;
+            return res.json();
+        })
             .catch(this.handleError);
     };
     ApiService.prototype.loginUser = function (userData) {
+        var _this = this;
+        this.loggedUser.username = userData.username;
         var body = JSON.stringify(userData);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + 'login/', body, options)
+        return this.http.post(this.apiUrl + 'login/', body, this.options)
             .toPromise()
-            .then(function (res) { return res.json(); })
+            .then(function (res) {
+            _this.loggedUser.token = res.json().token;
+            return res.json();
+        })
             .catch(this.handleError);
     };
     ApiService.prototype.handleError = function (error) {

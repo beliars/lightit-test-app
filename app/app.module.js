@@ -19,6 +19,7 @@ var auth_component_1 = require('./components/auth/auth.component');
 var register_component_1 = require('./components/register/register.component');
 var login_component_1 = require('./components/login/login.component');
 var products_component_1 = require('./components/products/products.component');
+var product_item_comments_component_1 = require('./components/product-item-comments/product-item-comments.component');
 var product_item_component_1 = require('./components/product-item/product-item.component');
 var AppModule = (function () {
     function AppModule() {
@@ -45,7 +46,15 @@ var AppModule = (function () {
                     }
                 ])
             ],
-            declarations: [app_component_1.AppComponent, auth_component_1.AuthComponent, register_component_1.RegisterComponent, login_component_1.LoginComponent, products_component_1.ProductsComponent, product_item_component_1.ProductItemComponent],
+            declarations: [
+                app_component_1.AppComponent,
+                auth_component_1.AuthComponent,
+                register_component_1.RegisterComponent,
+                login_component_1.LoginComponent,
+                products_component_1.ProductsComponent,
+                product_item_comments_component_1.ProductItemCommentsComponent,
+                product_item_component_1.ProductItemComponent
+            ],
             providers: [api_service_1.ApiService],
             bootstrap: [app_component_1.AppComponent]
         }), 
