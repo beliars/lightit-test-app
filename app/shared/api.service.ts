@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/observable/throw';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
 
 import { Product } from './product.model';
 import { Comment } from './comment.model';
@@ -21,39 +16,43 @@ export class ApiService {
     constructor(private http: Http) {
     }
 
-    getProducts(): Observable<Product[]> {
+    getProducts(): Promise<Product[]> {
     	return this.http.get(this.apiUrl + 'products/')
-    		.map(res => res.json())
+            .toPromise()
+    		.then(res => res.json())
     		.catch(this.handleError);
     }
 
-    getComments(id): Observable<Comment[]> {
+    getComments(id): Promise<Comment[]> {
     	return this.http.get(this.apiUrl + 'reviews/' + id)
-    		.map(res => res.json())
+            .toPromise()
+    		.then(res => res.json())
     		.catch(this.handleError);
     }
 
-    regUser(userData) {
+    regUser(userData: any): Promise<any> {
     	let body = JSON.stringify(userData);
     	let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
     	return this.http.post(this.apiUrl + 'register/', body, options)
-            .map(res => res.json())
+            .toPromise()
+            .then(res => res.json())
             .catch(this.handleError); 
     }
 
-    loginUser(userData) {
+    loginUser(userData: any): Promise<any> {
     	let body = JSON.stringify(userData);
     	let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
     	return this.http.post(this.apiUrl + 'login/', body, options)
-            .map(res => res.json())
+            .toPromise()
+            .then(res => res.json())
             .catch(this.handleError); 
     }
 
-    private handleError(error) {
+    private handleError(error: Error) {
         console.log('An error has occurred!', error);
-        return Observable.throw(error.message || error);
+        return Promise.reject(error.message || error);
     }
 
 }

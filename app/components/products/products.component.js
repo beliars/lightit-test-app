@@ -21,7 +21,7 @@ var ProductsComponent = (function () {
     };
     ProductsComponent.prototype.getProducts = function () {
         var _this = this;
-        this.apiService.getProducts().subscribe(function (products) { return _this.products = products; });
+        this.apiService.getProducts().then(function (products) { return _this.products = products; });
     };
     ProductsComponent.prototype.selectProduct = function (product) {
         this.selectedProduct = product;
@@ -29,7 +29,7 @@ var ProductsComponent = (function () {
     };
     ProductsComponent.prototype.getComments = function (id) {
         var _this = this;
-        this.apiService.getComments(id).subscribe(function (comments) { return _this.comments = comments; });
+        this.apiService.getComments(id).then(function (comments) { return _this.comments = comments; });
     };
     ProductsComponent.prototype.goBack = function () {
         this.location.back();

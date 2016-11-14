@@ -12,88 +12,36 @@ import { ApiService } from '../../shared/api.service';
 })
 
 export class LoginComponent {
-		userReg: Object;
-		userLogin: Object;
-		token: string;
-		message;
+
+        userData = {
+			username: '',
+			password: ''
+		};
+		loginData = {};
+		message: string;
 
 	constructor(private apiService: ApiService, private router: Router) {
-		this.userReg = {};
-		this.message = {};
-		this.token = '';
 	}
 
-	register(event, username, password) {
-
-		this.message = {};
-		let usernameInput = document.querySelector('input[type="text"]');
-		let passwordInput = document.querySelector('input[type="password"]');
-
-		if (username !== '' && password !== '') {
-
-			event.preventDefault();
-
-			let userData = {
-				"username": username,
-				"password": password
-			};
-
-			this.apiService.regUser(userData).subscribe(userReg => {
-				console.log(userReg);
-				if (userReg.success) {
-					this.message.success = 'Registration successfull. Logging in...';
-					this.token = userReg.token; 
-					console.log('User token is ' + this.token);
-					let link = ['/products'];
-					setTimeout(() => {
-       					this.router.navigate(link);
-					}, 2000);
-				} 
-				else {
-					this.message.error = userReg.message;
-					usernameInput.focus();
-					passwordInput.value = '';
-
-				}
-				return this.userReg = userReg;
-			});
-		}
-	}
-
-	login(event, username, password) {
-
-		this.message = {};
-		let usernameInput = document.querySelector('input[type="text"]');
-		let passwordInput = document.querySelector('input[type="password"]');
-
-		if (username !== '' && password !== '') {
-
-			event.preventDefault();
-
-			let userData = {
-				"username": username,
-				"password": password
-			};
-
-			this.apiService.loginUser(userData).subscribe(userLogin => {
-				console.log(userLogin);
-				if (userLogin.success) {
-					this.message.success = 'Logging in...';
-					this.token = userLogin.token; 
-					console.log('User token is ' + this.token);
-					let link = ['/products'];
-					setTimeout(() => {
-       					this.router.navigate(link);
-					}, 2000);
-				} 
-				else {
-					this.message.error = userLogin.message;
-					usernameInput.focus();
-					passwordInput.value = '';
-
-				}
-				return this.userLogin = userLogin;
-			});
-		}
-	}
+    onSubmit(form, usernameInput) {
+        console.log(form);
+        if (form.valid) {
+            this.apiService.loginUser(this.userData).then(loginData => {
+                console.log(loginData);
+                if (loginData.success) {
+                    this.message = 'Logging in...';
+                    let link = ['/products'];
+                    setTimeout(() => {
+                        this.router.navigate(link);
+                    }, 2000);
+                }
+                else {
+                    this.message = loginData.message;
+                    usernameInput.focus();
+                    this.userData.password = '';
+                }
+                return this.loginData = loginData;
+            });
+        }
+    }
 }

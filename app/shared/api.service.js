@@ -10,10 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
-require('rxjs/add/observable/throw');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/catch');
+require('rxjs/add/operator/toPromise');
 var ApiService = (function () {
     function ApiService(http) {
         this.http = http;
@@ -21,12 +18,14 @@ var ApiService = (function () {
     }
     ApiService.prototype.getProducts = function () {
         return this.http.get(this.apiUrl + 'products/')
-            .map(function (res) { return res.json(); })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.getComments = function (id) {
         return this.http.get(this.apiUrl + 'reviews/' + id)
-            .map(function (res) { return res.json(); })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.regUser = function (userData) {
@@ -34,7 +33,8 @@ var ApiService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + 'register/', body, options)
-            .map(function (res) { return res.json(); })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.loginUser = function (userData) {
@@ -42,12 +42,13 @@ var ApiService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + 'login/', body, options)
-            .map(function (res) { return res.json(); })
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.handleError = function (error) {
         console.log('An error has occurred!', error);
-        return Observable_1.Observable.throw(error.message || error);
+        return Promise.reject(error.message || error);
     };
     ApiService = __decorate([
         core_1.Injectable(), 

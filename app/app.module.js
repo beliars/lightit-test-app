@@ -12,8 +12,11 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
+var forms_1 = require('@angular/forms');
 var api_service_1 = require('./shared/api.service');
 var app_component_1 = require('./components/app.component');
+var auth_component_1 = require('./components/auth/auth.component');
+var register_component_1 = require('./components/register/register.component');
 var login_component_1 = require('./components/login/login.component');
 var products_component_1 = require('./components/products/products.component');
 var product_item_component_1 = require('./components/product-item/product-item.component');
@@ -24,11 +27,12 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
                 http_1.HttpModule,
                 router_1.RouterModule.forRoot([
                     {
                         path: '',
-                        redirectTo: '/login',
+                        redirectTo: '/auth',
                         pathMatch: 'full'
                     },
                     {
@@ -36,12 +40,12 @@ var AppModule = (function () {
                         component: products_component_1.ProductsComponent
                     },
                     {
-                        path: 'login',
-                        component: login_component_1.LoginComponent
+                        path: 'auth',
+                        component: auth_component_1.AuthComponent
                     }
                 ])
             ],
-            declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, products_component_1.ProductsComponent, product_item_component_1.ProductItemComponent],
+            declarations: [app_component_1.AppComponent, auth_component_1.AuthComponent, register_component_1.RegisterComponent, login_component_1.LoginComponent, products_component_1.ProductsComponent, product_item_component_1.ProductItemComponent],
             providers: [api_service_1.ApiService],
             bootstrap: [app_component_1.AppComponent]
         }), 

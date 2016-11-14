@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit{
     }
 
     getProducts() {
-        this.apiService.getProducts().subscribe(products => this.products = products);
+        this.apiService.getProducts().then(products => this.products = products);
     }
 
     selectProduct(product: Product) {
@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit{
     }
 
     getComments(id) {
-        this.apiService.getComments(id).subscribe(comments => this.comments = comments);
+        this.apiService.getComments(id).then(comments => this.comments = comments);
     }
 
     goBack(): void {
