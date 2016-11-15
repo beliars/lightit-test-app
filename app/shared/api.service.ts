@@ -12,7 +12,9 @@ import { User } from './user.model';
 export class ApiService {
 
     private apiUrl = 'http://smktesting.herokuapp.com/api/';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({'Content-Type': 'application/json',
+                                   'Accept': 'application/json' });
+    
     private options = new RequestOptions({headers: this.headers});
     
     private loggedUser = {
@@ -28,14 +30,14 @@ export class ApiService {
     }
 
     getProducts(): Promise<Product[]> {
-    	return this.http.get(this.apiUrl + 'products/')
+    	return this.http.get(this.apiUrl + 'products/', this.options)
             .toPromise()
     		.then(res => res.json())
     		.catch(this.handleError);
     }
 
     getComments(id): Promise<Comment[]> {
-    	return this.http.get(this.apiUrl + 'reviews/' + id)
+    	return this.http.get(this.apiUrl + 'reviews/' + id, this.options)
             .toPromise()
     		.then(res => res.json())
     		.catch(this.handleError);

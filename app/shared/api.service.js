@@ -15,7 +15,8 @@ var ApiService = (function () {
     function ApiService(http) {
         this.http = http;
         this.apiUrl = 'http://smktesting.herokuapp.com/api/';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json',
+            'Accept': 'application/json' });
         this.options = new http_1.RequestOptions({ headers: this.headers });
         this.loggedUser = {
             username: '',
@@ -26,13 +27,13 @@ var ApiService = (function () {
         return this.loggedUser;
     };
     ApiService.prototype.getProducts = function () {
-        return this.http.get(this.apiUrl + 'products/')
+        return this.http.get(this.apiUrl + 'products/', this.options)
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.getComments = function (id) {
-        return this.http.get(this.apiUrl + 'reviews/' + id)
+        return this.http.get(this.apiUrl + 'reviews/' + id, this.options)
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);

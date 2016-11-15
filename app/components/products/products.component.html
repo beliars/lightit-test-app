@@ -1,4 +1,4 @@
-<p *ngIf="loggedUser.username" class="username">Welcome, {{ loggedUser.username }}<span class="glyphicon glyphicon-log-out" title="Logout" (click)="logout()"></span></p>
+<p *ngIf="loggedUser.username" class="username">Hello, {{ loggedUser.username }}<span class="glyphicon glyphicon-log-out" title="Logout" (click)="logout()"></span></p>
 <ul class="products list-inline">
 	<li *ngFor="let product of products" 
 		[class.selected]="product === selectedProduct" 
