@@ -15,19 +15,18 @@ var LoginComponent = (function () {
     function LoginComponent(apiService, router) {
         this.apiService = apiService;
         this.router = router;
-        this.userData = {
+        this.loginData = {
             username: '',
             password: ''
         };
-        this.loginData = {};
+        this.resData = {};
     }
     LoginComponent.prototype.onSubmit = function (form, usernameInput) {
         var _this = this;
-        console.log(form);
         if (form.valid) {
-            this.apiService.loginUser(this.userData).then(function (loginData) {
-                console.log(loginData);
-                if (loginData.success) {
+            this.apiService.loginUser(this.loginData).then(function (resData) {
+                console.log(resData);
+                if (resData.success) {
                     _this.message = 'Logging in...';
                     var link_1 = ['/products'];
                     setTimeout(function () {
@@ -35,11 +34,11 @@ var LoginComponent = (function () {
                     }, 2000);
                 }
                 else {
-                    _this.message = loginData.message;
+                    _this.message = resData.message;
                     usernameInput.focus();
-                    _this.userData.password = '';
+                    _this.loginData.password = '';
                 }
-                return _this.loginData = loginData;
+                return _this.loginData = resData;
             });
         }
     };

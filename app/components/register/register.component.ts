@@ -13,22 +13,21 @@ import { ApiService } from '../../shared/api.service';
 
 export class RegisterComponent {
 
-		userData = {
+		regData = {
 			username: '',
 			password: ''
 		};
-		regData = {};
+		resData = {};
 		message: string;
 
 	constructor(private apiService: ApiService, private router: Router) {
 	}
 
 	onSubmit(form, usernameInput) {
-		console.log(form);
 		if (form.valid) {
-			this.apiService.regUser(this.userData).then(regData => {
-				console.log(regData);
-				if (regData.success) {
+			this.apiService.regUser(this.regData).then(resData => {
+				console.log(resData);
+				if (resData.success) {
 					this.message = 'Registration successfull. Logging in...';
 					let link = ['/products'];
 					setTimeout(() => {
@@ -36,11 +35,11 @@ export class RegisterComponent {
 					}, 2000);
 				}
 				else {
-					this.message = regData.message;
+					this.message = resData.message;
 					usernameInput.focus();
-					this.userData.password = '';
+					this.regData.password = '';
 				}
-				return this.regData = regData;
+				return this.regData = resData;
 			});
 		}
 	}

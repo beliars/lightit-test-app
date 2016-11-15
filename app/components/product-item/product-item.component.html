@@ -1,5 +1,4 @@
 <div class="selected-product row" *ngIf="selectedProduct">
-	<span class="glyphicon glyphicon-remove" (click)="closeProduct()"></span>
 	<div class="col-xs-6">
 		<h2>{{ selectedProduct.title }}</h2>
 		<img src="./app/shared/images/{{ selectedProduct.img }}" class="img-responsive" alt="">
@@ -9,5 +8,5 @@
 			<p>{{ selectedProduct.text }}</p>
 		</div>
 	</div>
-	<product-item-comments [comments]="comments"></product-item-comments>
+	<product-item-comments [selectedProduct]="selectedProduct" [comments]="comments" [loggedUser]="loggedUser"></product-item-comments>
 </div>

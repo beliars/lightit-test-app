@@ -1,27 +1,30 @@
 <div class="product-comments col-xs-6">
-	<div class="rating">
-		<label class="radio-inline">
-			<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="4"> 4
-		</label>
-		<label class="radio-inline">
-			<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="5"> 5
-		</label>
-	</div>
-	<textarea class="form-control" rows="3"></textarea>
-	<button type="submit" class="btn btn-primary">Send</button>
+	<form class="commentForm" #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)">
+		<div class="rating">
+			<label class="radio-inline">
+				<input type="radio" name="radio-option" id="radio1" value="1" [(ngModel)]="commentData.rate" required> 1
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="radio-option" id="radio2" value="2" [(ngModel)]="commentData.rate"> 2
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="radio-option" id="radio3" value="3" [(ngModel)]="commentData.rate"> 3
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="radio-option" id="radio4" value="4" [(ngModel)]="commentData.rate"> 4
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="radio-option" id="radio5" value="5" [(ngModel)]="commentData.rate"> 5
+			</label>
+		</div>
+		<textarea class="form-control" name="comment" rows="3" [(ngModel)]="commentData.text" required></textarea>
+		<p class="authError" *ngIf="authError">You should sign in first. <a (click)="toAuth()">To Auth page</a></p>
+		<button type="submit" class="btn btn-primary">Send</button>
+	</form>
 	<h3 class="text">Comments</h3>
 	<ul class="list-unstyled">
 		<li *ngFor="let comment of comments">
-			<div class="text">
+			<div>
 				<p>Comment: {{ comment.text }}</p>
 				<p>Rate: {{ comment.rate }}</p>
 				<p>Created by: {{ comment.created_by.username }} at {{ comment.created_at | date: 'fullDate' }}</p>

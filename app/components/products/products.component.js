@@ -25,7 +25,6 @@ var ProductsComponent = (function () {
     ProductsComponent.prototype.ngOnInit = function () {
         this.getProducts();
         this.getLoggedUserData();
-        console.log(this.loggedUser);
     };
     ProductsComponent.prototype.getProducts = function () {
         var _this = this;
@@ -37,7 +36,10 @@ var ProductsComponent = (function () {
     };
     ProductsComponent.prototype.getComments = function (id) {
         var _this = this;
-        this.apiService.getComments(id).then(function (comments) { return _this.comments = comments; });
+        this.apiService.getComments(id).then(function (comments) {
+            console.log(comments);
+            return _this.comments = comments;
+        });
     };
     ProductsComponent.prototype.getLoggedUserData = function () {
         this.loggedUser = this.apiService.getLoggedUser();
@@ -52,9 +54,6 @@ var ProductsComponent = (function () {
             _this.loggedUser.token = '';
             _this.router.navigate(['auth']);
         }, 1000);
-    };
-    ProductsComponent.prototype.closeProduct = function (selectedProduct) {
-        this.selectedProduct = !selectedProduct;
     };
     ProductsComponent = __decorate([
         core_1.Component({

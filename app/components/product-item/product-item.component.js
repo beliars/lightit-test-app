@@ -9,26 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var product_model_1 = require("../../shared/product.model");
 var ProductItemComponent = (function () {
     function ProductItemComponent() {
-        this.closedProduct = new core_1.EventEmitter();
     }
-    ProductItemComponent.prototype.closeProduct = function () {
-        this.closedProduct.emit(this.selectedProduct);
-    };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', product_model_1.Product)
+        __metadata('design:type', Object)
     ], ProductItemComponent.prototype, "selectedProduct", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
     ], ProductItemComponent.prototype, "comments", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], ProductItemComponent.prototype, "closedProduct", void 0);
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ProductItemComponent.prototype, "loggedUser", void 0);
     ProductItemComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

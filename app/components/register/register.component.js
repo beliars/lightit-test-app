@@ -15,19 +15,18 @@ var RegisterComponent = (function () {
     function RegisterComponent(apiService, router) {
         this.apiService = apiService;
         this.router = router;
-        this.userData = {
+        this.regData = {
             username: '',
             password: ''
         };
-        this.regData = {};
+        this.resData = {};
     }
     RegisterComponent.prototype.onSubmit = function (form, usernameInput) {
         var _this = this;
-        console.log(form);
         if (form.valid) {
-            this.apiService.regUser(this.userData).then(function (regData) {
-                console.log(regData);
-                if (regData.success) {
+            this.apiService.regUser(this.regData).then(function (resData) {
+                console.log(resData);
+                if (resData.success) {
                     _this.message = 'Registration successfull. Logging in...';
                     var link_1 = ['/products'];
                     setTimeout(function () {
@@ -35,11 +34,11 @@ var RegisterComponent = (function () {
                     }, 2000);
                 }
                 else {
-                    _this.message = regData.message;
+                    _this.message = resData.message;
                     usernameInput.focus();
-                    _this.userData.password = '';
+                    _this.regData.password = '';
                 }
-                return _this.regData = regData;
+                return _this.regData = resData;
             });
         }
     };

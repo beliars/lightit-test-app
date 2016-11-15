@@ -13,13 +13,5 @@ import { Comment } from "../../shared/comment.model";
 export class ProductItemComponent {
     @Input() selectedProduct: Product;
     @Input() comments: Comment[];
-    @Output() closedProduct: EventEmitter<Product>;
-
-    constructor() {
-        this.closedProduct = new EventEmitter<Product>();
-    }
-
-    closeProduct() {
-        this.closedProduct.emit(this.selectedProduct);
-    }
+    @Input() loggedUser;
 }

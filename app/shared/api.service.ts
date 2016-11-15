@@ -43,9 +43,9 @@ export class ApiService {
     		.catch(this.handleError);
     }
 
-    regUser(userData: User): Promise<any> {
-        this.loggedUser.username = userData.username;
-    	let body = JSON.stringify(userData);
+    regUser(regData: User): Promise<any> {
+        this.loggedUser.username = regData.username;
+    	let body = JSON.stringify(regData);
     	return this.http.post(this.apiUrl + 'register/', body, this.options)
             .toPromise()
             .then(res => {
@@ -57,9 +57,9 @@ export class ApiService {
 
     data;
 
-    loginUser(userData: User): Promise<any> {
-        this.loggedUser.username = userData.username;
-    	let body = JSON.stringify(userData);
+    loginUser(loginData: User): Promise<any> {
+        this.loggedUser.username = loginData.username;
+    	let body = JSON.stringify(loginData);
     	return this.http.post(this.apiUrl + 'login/', body, this.options)
             .toPromise()
             .then(res => {
@@ -67,6 +67,20 @@ export class ApiService {
                 return res.json()
                 })
             .catch(this.handleError);
+    }
+
+    postComment(id: number, commentData: any, user: any): Promise<any> {
+        let body = JSON.stringify(commentData);
+        // this.headers.append('Authorization', 'Token ' + user.token);
+        let headers = new Headers({'Content-Type': 'application/json',
+                                   'Accept': 'application/json',
+                                    'Authorization': 'Token ' + user.token});
+        let options = new RequestOptions({headers: headers});                         
+        console.log(this.headers);
+        return this.http.post(this.apiUrl + 'reviews/' + id, body, options)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError); 
     }
 
     private handleError(error: Error) {

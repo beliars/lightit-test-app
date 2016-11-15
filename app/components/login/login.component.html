@@ -1,11 +1,11 @@
 <form class="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm, usernameInput)">
 	<div class="form-group">
 		<label for="username">Email address</label>
-		<input type="text" name="username" class="form-control" id="username" placeholder="Username" #usernameInput [(ngModel)]="userData.username" minlength="2" maxlength="16" required>
+		<input type="text" name="username" class="form-control" id="username" placeholder="Username" #usernameInput [(ngModel)]="loginData.username" minlength="2" maxlength="16" required>
 	</div>
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="password" name="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="userData.password" minlength="3" maxlength="16" required>
+		<input type="password" name="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="loginData.password" minlength="3" maxlength="16" required>
 	</div>
 	<button type="submit" class="btn btn-success">Sign In</button>
     <p *ngIf="message" class="message">{{ message }}</p>

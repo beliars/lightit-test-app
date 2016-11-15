@@ -4,7 +4,7 @@
 		[class.selected]="product === selectedProduct" 
 		(click)="selectProduct(product)">{{ product.title }}
 	</li>
+<button type="button" class="btn btn-danger go-back" (click)="goBack()">Back</button>
 </ul>
-<button *ngIf="!selectedProduct" type="button" class="btn btn-danger go-back" (click)="goBack()">Back</button>
 <hr *ngIf="selectedProduct">
-<product-item (closedProduct)="closeProduct($event)" [selectedProduct]="selectedProduct" [comments]="comments"></product-item>
+<product-item [selectedProduct]="selectedProduct" [comments]="comments" [loggedUser]="loggedUser"></product-item>

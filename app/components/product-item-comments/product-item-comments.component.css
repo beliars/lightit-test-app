@@ -41,3 +41,13 @@
     margin-top: 15px;
     padding: 6px 25px;
 }
+
+.product-comments .authError {
+    color: red;
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+
+.product-comments .authError a {
+    cursor: pointer;
+}

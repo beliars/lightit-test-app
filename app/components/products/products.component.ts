@@ -16,13 +16,12 @@ import { Comment } from '../../shared/comment.model';
 export class ProductsComponent implements OnInit{ 
 
     products: Product[];
-    selectedProduct: any;
+    selectedProduct: Product;
     comments: Comment[];
     loggedUser = {
         username: '',
         token: ''
     };
-
 
     constructor(private apiService: ApiService, 
                 private location: Location,
@@ -32,7 +31,6 @@ export class ProductsComponent implements OnInit{
     ngOnInit() {
         this.getProducts();
         this.getLoggedUserData();
-        console.log(this.loggedUser);
     }
 
     getProducts(): void {
@@ -45,7 +43,10 @@ export class ProductsComponent implements OnInit{
     }
 
     getComments(id): void {
-        this.apiService.getComments(id).then(comments => this.comments = comments);
+        this.apiService.getComments(id).then(comments => {
+            console.log(comments);
+            return this.comments = comments
+        });
     }
 
     getLoggedUserData(): void {
@@ -63,9 +64,5 @@ export class ProductsComponent implements OnInit{
             this.router.navigate(['auth']);
         }, 1000);
 
-    }
-
-    closeProduct(selectedProduct: Product) {
-        this.selectedProduct = !selectedProduct;
     }
 }

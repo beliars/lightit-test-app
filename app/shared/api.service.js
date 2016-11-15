@@ -38,10 +38,10 @@ var ApiService = (function () {
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
-    ApiService.prototype.regUser = function (userData) {
+    ApiService.prototype.regUser = function (regData) {
         var _this = this;
-        this.loggedUser.username = userData.username;
-        var body = JSON.stringify(userData);
+        this.loggedUser.username = regData.username;
+        var body = JSON.stringify(regData);
         return this.http.post(this.apiUrl + 'register/', body, this.options)
             .toPromise()
             .then(function (res) {
@@ -50,16 +50,29 @@ var ApiService = (function () {
         })
             .catch(this.handleError);
     };
-    ApiService.prototype.loginUser = function (userData) {
+    ApiService.prototype.loginUser = function (loginData) {
         var _this = this;
-        this.loggedUser.username = userData.username;
-        var body = JSON.stringify(userData);
+        this.loggedUser.username = loginData.username;
+        var body = JSON.stringify(loginData);
         return this.http.post(this.apiUrl + 'login/', body, this.options)
             .toPromise()
             .then(function (res) {
             _this.loggedUser.token = res.json().token;
             return res.json();
         })
+            .catch(this.handleError);
+    };
+    ApiService.prototype.postComment = function (id, commentData, user) {
+        var body = JSON.stringify(commentData);
+        // this.headers.append('Authorization', 'Token ' + user.token);
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Token ' + user.token });
+        var options = new http_1.RequestOptions({ headers: headers });
+        console.log(this.headers);
+        return this.http.post(this.apiUrl + 'reviews/' + id, body, options)
+            .toPromise()
+            .then(function (res) { return res.json(); })
             .catch(this.handleError);
     };
     ApiService.prototype.handleError = function (error) {

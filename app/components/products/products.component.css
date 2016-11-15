@@ -27,6 +27,7 @@
 }
 
 .go-back {
+    float: right;
     font-size: 12px;
     margin: 15px 0 0 10px;
     line-height: 10px;
