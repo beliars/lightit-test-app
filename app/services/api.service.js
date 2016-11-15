@@ -64,7 +64,6 @@ var ApiService = (function () {
     };
     ApiService.prototype.postComment = function (id, commentData, user) {
         var body = JSON.stringify(commentData);
-        // this.headers.append('Authorization', 'Token ' + user.token);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': 'Token ' + user.token });

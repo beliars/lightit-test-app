@@ -4,7 +4,7 @@ import { HttpModule }    from '@angular/http';
 import { RouterModule }   from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 
-import { ApiService } from './shared/api.service';
+import { ApiService } from './services/api.service';
 import { AppComponent } from './components/app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { RegisterComponent } from './components/register/register.component';

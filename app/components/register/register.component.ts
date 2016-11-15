@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../../shared/user.model';
-import { ApiService } from '../../shared/api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
 	moduleId: module.id,
@@ -27,14 +27,13 @@ export class RegisterComponent {
 	onSubmit(form, usernameInput) {
 		if (form.valid) {
 			this.apiService.regUser(this.regData).then(resData => {
-				console.log(resData);
 				if (resData.success) {
 					this.failMessage = '';
 					this.successMessage = 'Registration successfull. Logging in...';
 					let link = ['/products'];
 					setTimeout(() => {
 						this.router.navigate(link);
-					}, 2000);
+					}, 1000);
 				}
 				else {
 					this.successMessage = '';

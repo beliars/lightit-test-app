@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { ApiService } from '../../shared/api.service';
+import { ApiService } from '../../services/api.service';
 import { Product } from '../../shared/product.model';
 import { Comment } from '../../shared/comment.model';
 
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit{
                 private router: Router) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getProducts();
         this.getLoggedUserData();
     }
@@ -43,9 +43,7 @@ export class ProductsComponent implements OnInit{
     }
 
     getComments(id): void {
-        this.apiService.getComments(id).then(comments => {
-            return this.comments = comments
-        });
+        this.apiService.getComments(id).then(comments => this.comments = comments);
     }
 
     getLoggedUserData(): void {

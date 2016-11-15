@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var router_1 = require('@angular/router');
-var api_service_1 = require('../../shared/api.service');
+var api_service_1 = require('../../services/api.service');
 var ProductsComponent = (function () {
     function ProductsComponent(apiService, location, router) {
         this.apiService = apiService;
@@ -36,9 +36,7 @@ var ProductsComponent = (function () {
     };
     ProductsComponent.prototype.getComments = function (id) {
         var _this = this;
-        this.apiService.getComments(id).then(function (comments) {
-            return _this.comments = comments;
-        });
+        this.apiService.getComments(id).then(function (comments) { return _this.comments = comments; });
     };
     ProductsComponent.prototype.getLoggedUserData = function () {
         this.loggedUser = this.apiService.getLoggedUser();

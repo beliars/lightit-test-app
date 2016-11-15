@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var api_service_1 = require('../../shared/api.service');
+var api_service_1 = require('../../services/api.service');
 var LoginComponent = (function () {
     function LoginComponent(apiService, router) {
         this.apiService = apiService;
@@ -25,14 +25,13 @@ var LoginComponent = (function () {
         var _this = this;
         if (form.valid) {
             this.apiService.loginUser(this.loginData).then(function (resData) {
-                console.log(resData);
                 if (resData.success) {
                     _this.failMessage = '';
                     _this.successMessage = 'Logging in...';
                     var link_1 = ['/products'];
                     setTimeout(function () {
                         _this.router.navigate(link_1);
-                    }, 2000);
+                    }, 1000);
                 }
                 else {
                     _this.successMessage = '';

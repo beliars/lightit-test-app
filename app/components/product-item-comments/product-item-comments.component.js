@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var api_service_1 = require('../../shared/api.service');
+var api_service_1 = require('../../services/api.service');
 var ProductItemCommentsComponent = (function () {
     function ProductItemCommentsComponent(apiService, router) {
         this.apiService = apiService;

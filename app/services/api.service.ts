@@ -3,9 +3,9 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Product } from './product.model';
-import { Comment } from './comment.model';
-import { User } from './user.model';
+import { Product } from '../shared/product.model';
+import { Comment } from '../shared/comment.model';
+import { User } from '../shared/user.model';
 
 @Injectable()
 
@@ -43,7 +43,7 @@ export class ApiService {
     		.catch(this.handleError);
     }
 
-    regUser(regData: User): Promise<any> {
+    regUser(regData): Promise<any> {
         this.loggedUser.username = regData.username;
     	let body = JSON.stringify(regData);
     	return this.http.post(this.apiUrl + 'register/', body, this.options)
@@ -57,7 +57,7 @@ export class ApiService {
 
     data;
 
-    loginUser(loginData: User): Promise<any> {
+    loginUser(loginData): Promise<any> {
         this.loggedUser.username = loginData.username;
     	let body = JSON.stringify(loginData);
     	return this.http.post(this.apiUrl + 'login/', body, this.options)
@@ -71,7 +71,6 @@ export class ApiService {
 
     postComment(id: number, commentData: any, user: any): Promise<any> {
         let body = JSON.stringify(commentData);
-        // this.headers.append('Authorization', 'Token ' + user.token);
         let headers = new Headers({'Content-Type': 'application/json',
                                    'Accept': 'application/json',
                                     'Authorization': 'Token ' + user.token});

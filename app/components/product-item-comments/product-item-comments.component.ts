@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ApiService } from '../../shared/api.service';
+import { ApiService } from '../../services/api.service';
 
 import { Product } from "../../shared/product.model";
 import { Comment } from "../../shared/comment.model";
