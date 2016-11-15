@@ -27,16 +27,17 @@ var LoginComponent = (function () {
             this.apiService.loginUser(this.loginData).then(function (resData) {
                 console.log(resData);
                 if (resData.success) {
-                    _this.message = 'Logging in...';
+                    _this.failMessage = '';
+                    _this.successMessage = 'Logging in...';
                     var link_1 = ['/products'];
                     setTimeout(function () {
                         _this.router.navigate(link_1);
                     }, 2000);
                 }
                 else {
-                    _this.message = resData.message;
+                    _this.successMessage = '';
+                    _this.failMessage = resData.message + '.';
                     usernameInput.focus();
-                    _this.loginData.password = '';
                 }
                 return _this.loginData = resData;
             });

@@ -18,7 +18,8 @@ export class LoginComponent {
 			password: ''
 		};
 		resData = {};
-		message: string;
+		successMessage: string;
+		failMessage: string;
 
 	constructor(private apiService: ApiService, private router: Router) {
 	}
@@ -28,16 +29,17 @@ export class LoginComponent {
             this.apiService.loginUser(this.loginData).then(resData => {
                 console.log(resData);
                 if (resData.success) {
-                    this.message = 'Logging in...';
+                    this.failMessage = '';
+                    this.successMessage = 'Logging in...';
                     let link = ['/products'];
                     setTimeout(() => {
                         this.router.navigate(link);
                     }, 2000);
                 }
                 else {
-                    this.message = resData.message;
+                    this.successMessage = '';
+                    this.failMessage = resData.message + '.';
                     usernameInput.focus();
-                    this.loginData.password = '';
                 }
                 return this.loginData = resData;
             });

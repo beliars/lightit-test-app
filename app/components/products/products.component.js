@@ -37,7 +37,6 @@ var ProductsComponent = (function () {
     ProductsComponent.prototype.getComments = function (id) {
         var _this = this;
         this.apiService.getComments(id).then(function (comments) {
-            console.log(comments);
             return _this.comments = comments;
         });
     };

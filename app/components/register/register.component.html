@@ -8,7 +8,6 @@
 		<input type="password" name="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="regData.password" minlength="3" maxlength="16" required>
 	</div>
 	<button type="submit" class="btn btn-primary">Sign Up</button>
-	<!--<button type="submit" class="btn btn-success"
-        (click)="login($event, username.value, password.value)">Sign In</button>-->
-    <p *ngIf="message" class="message">{{ message }}</p>
+	<p *ngIf="successMessage" class="message text-success">{{ successMessage }}</p>
+    <p *ngIf="failMessage" class="message text-danger">{{ failMessage }}</p>
 </form>

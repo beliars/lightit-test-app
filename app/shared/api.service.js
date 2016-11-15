@@ -69,7 +69,6 @@ var ApiService = (function () {
             'Accept': 'application/json',
             'Authorization': 'Token ' + user.token });
         var options = new http_1.RequestOptions({ headers: headers });
-        console.log(this.headers);
         return this.http.post(this.apiUrl + 'reviews/' + id, body, options)
             .toPromise()
             .then(function (res) { return res.json(); })

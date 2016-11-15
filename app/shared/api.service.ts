@@ -76,7 +76,6 @@ export class ApiService {
                                    'Accept': 'application/json',
                                     'Authorization': 'Token ' + user.token});
         let options = new RequestOptions({headers: headers});                         
-        console.log(this.headers);
         return this.http.post(this.apiUrl + 'reviews/' + id, body, options)
             .toPromise()
             .then(res => res.json())

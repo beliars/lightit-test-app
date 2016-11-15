@@ -18,7 +18,8 @@ export class RegisterComponent {
 			password: ''
 		};
 		resData = {};
-		message: string;
+		successMessage: string;
+		failMessage: string;
 
 	constructor(private apiService: ApiService, private router: Router) {
 	}
@@ -28,16 +29,17 @@ export class RegisterComponent {
 			this.apiService.regUser(this.regData).then(resData => {
 				console.log(resData);
 				if (resData.success) {
-					this.message = 'Registration successfull. Logging in...';
+					this.failMessage = '';
+					this.successMessage = 'Registration successfull. Logging in...';
 					let link = ['/products'];
 					setTimeout(() => {
 						this.router.navigate(link);
 					}, 2000);
 				}
 				else {
-					this.message = resData.message;
+					this.successMessage = '';
+					this.failMessage = resData.message + '.';
 					usernameInput.focus();
-					this.regData.password = '';
 				}
 				return this.regData = resData;
 			});

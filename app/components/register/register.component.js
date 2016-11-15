@@ -27,16 +27,17 @@ var RegisterComponent = (function () {
             this.apiService.regUser(this.regData).then(function (resData) {
                 console.log(resData);
                 if (resData.success) {
-                    _this.message = 'Registration successfull. Logging in...';
+                    _this.failMessage = '';
+                    _this.successMessage = 'Registration successfull. Logging in...';
                     var link_1 = ['/products'];
                     setTimeout(function () {
                         _this.router.navigate(link_1);
                     }, 2000);
                 }
                 else {
-                    _this.message = resData.message;
+                    _this.successMessage = '';
+                    _this.failMessage = resData.message + '.';
                     usernameInput.focus();
-                    _this.regData.password = '';
                 }
                 return _this.regData = resData;
             });

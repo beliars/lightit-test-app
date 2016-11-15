@@ -33,8 +33,6 @@ export class ProductItemCommentsComponent {
 		if (form.valid) {
 			if (!this.loggedUser.token) {
 				this.authError = true;
-				this.commentData.rate = '';
-				this.commentData.text = '';
 				return;
 			}
 			this.apiService.postComment(this.selectedProduct.id, this.commentData, this.loggedUser)

@@ -44,7 +44,6 @@ export class ProductsComponent implements OnInit{
 
     getComments(id): void {
         this.apiService.getComments(id).then(comments => {
-            console.log(comments);
             return this.comments = comments
         });
     }
