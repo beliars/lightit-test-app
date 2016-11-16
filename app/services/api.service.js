@@ -40,6 +40,7 @@ var ApiService = (function () {
     };
     ApiService.prototype.regUser = function (regData) {
         var _this = this;
+        regData.username = regData.username.trim();
         this.loggedUser.username = regData.username;
         var body = JSON.stringify(regData);
         return this.http.post(this.apiUrl + 'register/', body, this.options)
@@ -52,6 +53,7 @@ var ApiService = (function () {
     };
     ApiService.prototype.loginUser = function (loginData) {
         var _this = this;
+        loginData.username = loginData.username.trim();
         this.loggedUser.username = loginData.username;
         var body = JSON.stringify(loginData);
         return this.http.post(this.apiUrl + 'login/', body, this.options)
@@ -63,6 +65,7 @@ var ApiService = (function () {
             .catch(this.handleError);
     };
     ApiService.prototype.postComment = function (id, commentData, user) {
+        commentData.text = commentData.text.trim();
         var body = JSON.stringify(commentData);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json',
             'Accept': 'application/json',

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from '../../services/api.service';
@@ -13,31 +13,39 @@ import { Comment } from "../../shared/comment.model";
 	styleUrls: ['product-item-comments.component.css']
 })
 
-export class ProductItemCommentsComponent { 
+export class ProductItemCommentsComponent implements OnChanges { 
 	@Input() selectedProduct: Product;
     @Input() comments;
 	@Input() loggedUser;
 
 	resData = {};
+	commentData: any = {};
 	authError = false;
+	validateError = false;
 
 	constructor(private apiService: ApiService, private router: Router) {
 	}
 
-	commentData = {
-		rate: '',
-		text: ''
+	ngOnChanges() {
+		this.commentData = {
+			rate: '',
+			text: ''
+		}	
+		this.authError = false;
 	}
 
 	onSubmit(form) {
-		if (form.valid) {
-			if (!this.loggedUser.token) {
-				this.authError = true;
+		if (!this.loggedUser.token) {
+			this.authError = true;
+			return;
+		}
+		if (!this.commentData.rate || !this.commentData.text) {
+				this.validateError = true;
 				return;
 			}
+		if (form.valid) {
 			this.apiService.postComment(this.selectedProduct.id, this.commentData, this.loggedUser)
 				.then(resData => {
-					console.log(resData);
 					if (resData.success) {
 						this.comments.push({
 							created_at: Date.now(),
@@ -48,6 +56,7 @@ export class ProductItemCommentsComponent {
 					}
 					this.commentData.rate = '';
 					this.commentData.text = '';
+					this.validateError = false;
 					return this.resData = resData;
 				})
 		}

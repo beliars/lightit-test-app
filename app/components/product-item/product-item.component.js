@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var product_model_1 = require("../../shared/product.model");
 var ProductItemComponent = (function () {
     function ProductItemComponent() {
     }
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', product_model_1.Product)
     ], ProductItemComponent.prototype, "selectedProduct", void 0);
     __decorate([
         core_1.Input(), 

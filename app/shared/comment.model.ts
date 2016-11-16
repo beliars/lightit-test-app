@@ -1,4 +1,4 @@
-export interface Comment {
+export class Comment {
     id: number;
     rate: number;
     text: string;

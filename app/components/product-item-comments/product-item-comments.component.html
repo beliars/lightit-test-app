@@ -1,24 +1,20 @@
 <div class="product-comments col-xs-6">
-	<form class="commentForm" #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)">
-		<div class="rating">
-			<label class="radio-inline">
-				<input type="radio" name="radio-option" id="radio1" value="1" [(ngModel)]="commentData.rate" required> 1
-			</label>
-			<label class="radio-inline">
-				<input type="radio" name="radio-option" id="radio2" value="2" [(ngModel)]="commentData.rate"> 2
-			</label>
-			<label class="radio-inline">
-				<input type="radio" name="radio-option" id="radio3" value="3" [(ngModel)]="commentData.rate"> 3
-			</label>
-			<label class="radio-inline">
-				<input type="radio" name="radio-option" id="radio4" value="4" [(ngModel)]="commentData.rate"> 4
-			</label>
-			<label class="radio-inline">
-				<input type="radio" name="radio-option" id="radio5" value="5" [(ngModel)]="commentData.rate"> 5
-			</label>
+	<form class="commentForm" #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)" novalidate>
+		<div class="stars">
+			<input class="star star-5" id="star-5" type="radio" name="star" value="5" [(ngModel)]="commentData.rate" required/>
+			<label class="star star-5" for="star-5"></label>
+			<input class="star star-4" id="star-4" type="radio" name="star" value="4" [(ngModel)]="commentData.rate"/>
+			<label class="star star-4" for="star-4"></label>
+			<input class="star star-3" id="star-3" type="radio" name="star" value="3" [(ngModel)]="commentData.rate"/>
+			<label class="star star-3" for="star-3"></label>
+			<input class="star star-2" id="star-2" type="radio" name="star" value="2" [(ngModel)]="commentData.rate"/>
+			<label class="star star-2" for="star-2"></label>
+			<input class="star star-1" id="star-1" type="radio" name="star" value="1" [(ngModel)]="commentData.rate"/>
+			<label class="star star-1" for="star-1"></label>
 		</div>
 		<textarea class="form-control" name="comment" rows="3" [(ngModel)]="commentData.text" required></textarea>
-		<p class="authError" *ngIf="authError">You should sign in first. <a (click)="toAuth()">To Auth page</a></p>
+		<p class="error" *ngIf="validateError">Select rating star and leave Your comment.</p>
+		<p class="error" *ngIf="authError">You should sign in first. <a (click)="toAuth()">To Auth page</a></p>
 		<button type="submit" class="btn btn-primary">Send</button>
 	</form>
 	<h3 class="text">Comments</h3>

@@ -11,27 +11,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var api_service_1 = require('../../services/api.service');
+var product_model_1 = require("../../shared/product.model");
 var ProductItemCommentsComponent = (function () {
     function ProductItemCommentsComponent(apiService, router) {
         this.apiService = apiService;
         this.router = router;
         this.resData = {};
+        this.commentData = {};
         this.authError = false;
+        this.validateError = false;
+    }
+    ProductItemCommentsComponent.prototype.ngOnChanges = function () {
         this.commentData = {
             rate: '',
             text: ''
         };
-    }
+        this.authError = false;
+    };
     ProductItemCommentsComponent.prototype.onSubmit = function (form) {
         var _this = this;
+        if (!this.loggedUser.token) {
+            this.authError = true;
+            return;
+        }
+        if (!this.commentData.rate || !this.commentData.text) {
+            this.validateError = true;
+            return;
+        }
         if (form.valid) {
-            if (!this.loggedUser.token) {
-                this.authError = true;
-                return;
-            }
             this.apiService.postComment(this.selectedProduct.id, this.commentData, this.loggedUser)
                 .then(function (resData) {
-                console.log(resData);
                 if (resData.success) {
                     _this.comments.push({
                         created_at: Date.now(),
@@ -42,6 +51,7 @@ var ProductItemCommentsComponent = (function () {
                 }
                 _this.commentData.rate = '';
                 _this.commentData.text = '';
+                _this.validateError = false;
                 return _this.resData = resData;
             });
         }
@@ -56,7 +66,7 @@ var ProductItemCommentsComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', product_model_1.Product)
     ], ProductItemCommentsComponent.prototype, "selectedProduct", void 0);
     __decorate([
         core_1.Input(), 

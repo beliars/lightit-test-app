@@ -44,6 +44,7 @@ export class ApiService {
     }
 
     regUser(regData): Promise<any> {
+        regData.username = regData.username.trim(); 
         this.loggedUser.username = regData.username;
     	let body = JSON.stringify(regData);
     	return this.http.post(this.apiUrl + 'register/', body, this.options)
@@ -55,9 +56,8 @@ export class ApiService {
             .catch(this.handleError); 
     }
 
-    data;
-
     loginUser(loginData): Promise<any> {
+        loginData.username = loginData.username.trim(); 
         this.loggedUser.username = loginData.username;
     	let body = JSON.stringify(loginData);
     	return this.http.post(this.apiUrl + 'login/', body, this.options)
@@ -70,6 +70,7 @@ export class ApiService {
     }
 
     postComment(id: number, commentData: any, user: any): Promise<any> {
+        commentData.text = commentData.text.trim();
         let body = JSON.stringify(commentData);
         let headers = new Headers({'Content-Type': 'application/json',
                                    'Accept': 'application/json',
