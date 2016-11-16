@@ -22,8 +22,13 @@ export class ApiService {
         token: ''
     }
 
-    getLoggedUser(){
+    getLoggedUser() {
         return this.loggedUser;
+    }
+
+    clearUserInputData() {
+        this.loggedUser.username = '';
+        this.loggedUser.token = '';
     }
 
     constructor(private http: Http) {

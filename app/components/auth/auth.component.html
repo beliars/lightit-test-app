@@ -1,7 +1,7 @@
 <div class="form-selection">
     <button type="button" class="btn btn-primary" (click)="registerSelect()">Go to Register Form</button>
     <button type="button" class="btn btn-success" (click)="loginSelect()">Go to Login Form</button>
-    <button type="button" routerLink="/products" class="btn btn-warning">Skip</button>
+    <button type="button" class="btn btn-warning" (click)="skipAuth()">Skip</button>
 </div>
 <app-register *ngIf="registerSelection"></app-register>
 <app-login *ngIf="loginSelection"></app-login>

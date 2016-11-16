@@ -9,8 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var api_service_1 = require('../../services/api.service');
 var AuthComponent = (function () {
-    function AuthComponent() {
+    function AuthComponent(apiService, router) {
+        this.apiService = apiService;
+        this.router = router;
         this.registerSelection = false;
         this.loginSelection = false;
     }
@@ -22,6 +26,10 @@ var AuthComponent = (function () {
         this.loginSelection = true;
         this.registerSelection = false;
     };
+    AuthComponent.prototype.skipAuth = function () {
+        this.apiService.clearUserInputData();
+        this.router.navigate(['products']);
+    };
     AuthComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -29,7 +37,7 @@ var AuthComponent = (function () {
             templateUrl: 'auth.component.html',
             styleUrls: ['auth.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [api_service_1.ApiService, router_1.Router])
     ], AuthComponent);
     return AuthComponent;
 }());

@@ -26,6 +26,10 @@ var ApiService = (function () {
     ApiService.prototype.getLoggedUser = function () {
         return this.loggedUser;
     };
+    ApiService.prototype.clearUserInputData = function () {
+        this.loggedUser.username = '';
+        this.loggedUser.token = '';
+    };
     ApiService.prototype.getProducts = function () {
         return this.http.get(this.apiUrl + 'products/', this.options)
             .toPromise()
